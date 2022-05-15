@@ -6,6 +6,7 @@ import com.restaurant.votemenu.repository.MenuRepository;
 import com.restaurant.votemenu.repository.RestaurantMenuRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +20,11 @@ public class MenuController {
   private final MenuRepository menuRepository;
 
   @PostMapping (value = "/create")
-  public void create(@RequestBody RestaurantEntity restaurant){
+  public ResponseEntity<RestaurantEntity> create(@RequestBody RestaurantEntity restaurant){
     List<MenuEntity> list = restaurant.getMenu();
     list.stream().forEach(r->r.setRestaurantEntity(restaurant));
-    restaurantRepository.saveAndFlush(restaurant);
+    var restaurantEntity = restaurantRepository.saveAndFlush(restaurant);
     menuRepository.saveAll(list);
-
+    return ResponseEntity.ok(restaurantEntity);
   }
 }
