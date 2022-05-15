@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class VoteController {
   private final RestaurantMenuRepository repository;
+ /* private final UserContextHolder userContextHolder;*/
 
   @GetMapping(value = "/vote/{id}")
   public ResponseEntity<?> vote(@PathVariable Long id){
+
     return ResponseEntity.ok(HttpEntity.EMPTY);
   }
 
