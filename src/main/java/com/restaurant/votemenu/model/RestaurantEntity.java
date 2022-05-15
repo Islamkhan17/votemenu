@@ -35,7 +35,7 @@ public class RestaurantEntity {
   @Column(name = "restaurant_id")
   @SequenceGenerator(name = "rest_seq", sequenceName = "rest_seq", allocationSize = 1, initialValue = START_SEQ)
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rest_seq")
-  private Long id;
+  private Integer id;
 
   @Column(name = "name")
   private String name;
@@ -43,6 +43,7 @@ public class RestaurantEntity {
   @OneToMany(mappedBy = "restaurantEntity")
   @OnDelete(action = OnDeleteAction.CASCADE)
   private List<MenuEntity> menu;
+
 
   @Column(name = "request_date")
   private LocalDate requestDate = LocalDate.now();
